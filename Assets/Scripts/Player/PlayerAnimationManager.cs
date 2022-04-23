@@ -29,4 +29,19 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         anim.SetBool("shooting", isShooting);
     }
+
+    public void PlayFallbackAnim()
+    {
+        anim.SetBool("fail", true);
+    }
+
+    private void OnEnable()
+    {
+        PlayerController.OnPlayerFailed += PlayFallbackAnim;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerFailed -= PlayFallbackAnim;
+    }
 }

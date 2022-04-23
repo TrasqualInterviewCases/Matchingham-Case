@@ -19,6 +19,7 @@ public class WeaponHandler : MonoBehaviour
     [Header("IK")]
     [SerializeField] Transform rightHandTarget;
     [SerializeField] Transform leftHandTarget;
+    [SerializeField] TwoBoneIKConstraint RightHandIK;
     [SerializeField] Rig rigLayer;
 
     [Header("Detector")]
@@ -27,7 +28,7 @@ public class WeaponHandler : MonoBehaviour
     private void Start()
     {
         animatedRot = weaponParent.transform.localRotation;
-        ChangeWeapon(2);
+        ChangeWeapon(0);
     }
 
     private void Update()
@@ -40,28 +41,28 @@ public class WeaponHandler : MonoBehaviour
         {
             SetRunningPosition();
         }
+        AlignIK();
     }
 
     private void SetShootingPosition()
     {
-        if (rigLayer.weight != 1)
+        if (RightHandIK.weight != 1)
         {
-            rigLayer.weight = 1;
+            RightHandIK.weight = 1;
             weaponParent.SetParent(model);
         }
         if (Vector3.Distance(weaponParent.transform.localPosition, riggedPos) >= 0.01f)
         {
             weaponParent.transform.localRotation = Quaternion.Lerp(weaponParent.transform.localRotation, Quaternion.identity, Time.deltaTime * weaponPositioningSpeed);
             weaponParent.transform.localPosition = Vector3.Lerp(weaponParent.transform.localPosition, riggedPos, Time.deltaTime * weaponPositioningSpeed);
-            AlignIK();
         }
     }
 
     private void SetRunningPosition()
     {
-        if (rigLayer.weight != 0)
+        if (RightHandIK.weight != 0)
         {
-            rigLayer.weight = 0;
+            RightHandIK.weight = 0;
             weaponParent.SetParent(rightHand);
         }
         if (Vector3.Distance(weaponParent.transform.localPosition, animatedPos) >= 0.01f)
@@ -91,5 +92,20 @@ public class WeaponHandler : MonoBehaviour
         activeWeapon.GetIKTargets(out leftTarget, out rightTarget);
         leftHandTarget.position = leftTarget.position;
         rightHandTarget.position = rightTarget.position;
+    }
+
+    private void CloseIK()
+    {
+        rigLayer.weight = 0;
+    }
+
+    private void OnEnable()
+    {
+        PlayerController.OnPlayerFailed += CloseIK;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerFailed -= CloseIK;
     }
 }

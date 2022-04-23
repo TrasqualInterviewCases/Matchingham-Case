@@ -1,13 +1,16 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     [Header("Data")]
-    [SerializeField] protected float shootCD = 0.5f;
-    protected float shootTimer = 0f;
+    [SerializeField] float shootCD = 0.5f;
+    float shootTimer = 0f;
 
     [Header("Visuals")]
-    [SerializeField] protected PoolableObjectType bulletType;
+    [SerializeField] PoolableObjectType bulletType;
+    [SerializeField] Vector3 gunRecoilPos;
+    [SerializeField] Vector3 gunRecoilRot;
 
     [Header("Components")]
     [SerializeField] ObstacleDetector detector;
@@ -29,7 +32,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    protected void ShootWeapon()
+    private void ShootWeapon()
     {
         shootTimer += Time.deltaTime;
         if (shootTimer >= shootCD)
@@ -37,9 +40,18 @@ public class Weapon : MonoBehaviour
             foreach (var shooter in shooters)
             {
                 shooter.Shoot(bulletType);
+                PlayRecoilAnim();
             }
             shootTimer = 0f;
         }
+    }
+
+    private void PlayRecoilAnim()
+    {
+        Sequence s = DOTween.Sequence();
+        s.Append(transform.DOLocalMove(gunRecoilPos, shootCD / 2f).SetEase(Ease.OutBack));
+        s.Join(transform.DOLocalRotate(gunRecoilRot, shootCD / 2f).SetEase(Ease.OutBack));
+        s.OnComplete(() => s.Rewind());
     }
 
     public void GetIKTargets(out Transform leftTarget, out Transform rightTarget)

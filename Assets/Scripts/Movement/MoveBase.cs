@@ -48,6 +48,16 @@ public abstract class MoveBase : MonoBehaviour
         return useRotation;
     }
 
+    public void ToggleRotationOn()
+    {
+        useRotation = true;
+    }
+
+    public void ToggleRotationOff()
+    {
+        useRotation = false;
+    }
+
     public void ChangeSpeed(float newMultiplier)
     {
         multiplier = newMultiplier;
@@ -82,6 +92,8 @@ public abstract class MoveBase : MonoBehaviour
         GameManager.OnGameStarted += ToggleMovementOn;
         GameManager.OnGameWon += ToggleMovementOff;
         GameManager.OnGameFailed += ToggleMovementOff;
+
+        PlayerController.OnPlayerFailed += ToggleMovementOff;
     }
 
     private void OnDisable()
@@ -93,5 +105,7 @@ public abstract class MoveBase : MonoBehaviour
         GameManager.OnGameStarted -= ToggleMovementOn;
         GameManager.OnGameWon -= ToggleMovementOff;
         GameManager.OnGameFailed -= ToggleMovementOff;
+
+        PlayerController.OnPlayerFailed -= ToggleMovementOff;
     }
 }

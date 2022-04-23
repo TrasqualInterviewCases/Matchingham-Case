@@ -3,6 +3,7 @@ using UnityEngine;
 public class PathMove : MoveBase
 {
     [SerializeField] Transform model;
+    [SerializeField] ObstacleDetector detector;
 
     Vector3 rotationSmoothVel;
     Vector3 prevXDir;
@@ -36,11 +37,23 @@ public class PathMove : MoveBase
     {
         if (CanMove())
         {
+            if (detector.DetectedTarget())
+            {
+                ToggleRotationOff();
+            }
+            else
+            {
+                ToggleRotationOn();
+            }
             Move();
 
             if (CanRotate())
             {
                 Rotate();
+            }
+            else
+            {
+                model.localRotation = Quaternion.Lerp(model.localRotation, Quaternion.identity, Time.deltaTime * data.rotationSpeed);
             }
         }
     }
