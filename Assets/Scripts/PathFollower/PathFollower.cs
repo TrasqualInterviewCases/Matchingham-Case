@@ -15,6 +15,7 @@ public class PathFollower : MonoBehaviour
 
     private void Update()
     {
+        if (path == null) return;
         if (!moveBase.CanMove()) return;
         UpdateDistance();
 

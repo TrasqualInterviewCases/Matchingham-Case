@@ -4,16 +4,17 @@ public class PlayerAnimationManager : MonoBehaviour
 {
     [SerializeField] Animator anim;
     [SerializeField] MoveBase moveBase;
-
-    private void Start()
-    {
-        ToggleShooting(true);
-    }
+    [SerializeField] ObstacleDetector detector;
 
     private void Update()
     {
         if(moveBase.CanMove())
-        PlayMoveAnim();        
+        PlayMoveAnim();
+
+        if (detector.DetectedTarget())
+            ToggleShooting(true);
+        else
+            ToggleShooting(false);
     }
 
     private void PlayMoveAnim()
@@ -24,7 +25,7 @@ public class PlayerAnimationManager : MonoBehaviour
         anim.SetFloat("moveForward", velocityZ, 0.1f, Time.deltaTime);
     }
 
-    private void ToggleShooting(bool isShooting)
+    public void ToggleShooting(bool isShooting)
     {
         anim.SetBool("shooting", isShooting);
     }
