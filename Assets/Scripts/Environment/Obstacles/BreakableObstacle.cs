@@ -1,4 +1,5 @@
 
+using TMPro;
 using UnityEngine;
 
 public class BreakableObstacle : ObstacleBase, IDamagable
@@ -6,12 +7,14 @@ public class BreakableObstacle : ObstacleBase, IDamagable
     [SerializeField] Transform model;
     [SerializeField] Collider col;
 
+    [SerializeField] TMP_Text healthText;
     [SerializeField] int maxHealth = 10;
     int currentHealth;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        SetHealthText();
     }
 
     public void TakeDamage(int amount)
@@ -22,6 +25,12 @@ public class BreakableObstacle : ObstacleBase, IDamagable
             BreakDown();
             currentHealth = 0;
         }
+        SetHealthText();
+    }
+
+    private void SetHealthText()
+    {
+        healthText.SetText(currentHealth.ToString());
     }
 
     private void BreakDown()
@@ -33,6 +42,7 @@ public class BreakableObstacle : ObstacleBase, IDamagable
             {
                 child.gameObject.AddComponent<Rigidbody>();
                 child.gameObject.AddComponent<BoxCollider>();
+                child.SetParent(null);
                 Destroy(child.gameObject, 5f);
             }
         }
