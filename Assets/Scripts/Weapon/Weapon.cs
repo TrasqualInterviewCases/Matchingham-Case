@@ -7,11 +7,15 @@ public class Weapon : MonoBehaviour
     protected float shootTimer = 0f;
 
     [Header("Visuals")]
-    [SerializeField] protected Bullet bulletPrefab;
+    [SerializeField] protected PoolableObjectType bulletType;
 
     [Header("Components")]
     [SerializeField] ObstacleDetector detector;
     [SerializeField] Shooter[] shooters;
+
+    [Header("IKTargets")]
+    [SerializeField] Transform targetForRight;
+    [SerializeField] Transform targetForLeft;
 
     bool canDetect = true;
 
@@ -37,9 +41,15 @@ public class Weapon : MonoBehaviour
         {
             foreach (var shooter in shooters)
             {
-                shooter.Shoot(bulletPrefab);
+                shooter.Shoot(bulletType);
             }
             shootTimer = 0f;
         }
+    }
+
+    public void GetIKTargets(out Transform leftTarget, out Transform rightTarget)
+    {
+        leftTarget = targetForLeft;
+        rightTarget = targetForRight;
     }
 }

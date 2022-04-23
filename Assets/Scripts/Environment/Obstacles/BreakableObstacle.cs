@@ -1,4 +1,3 @@
-
 using TMPro;
 using UnityEngine;
 
@@ -48,7 +47,7 @@ public class BreakableObstacle : ObstacleBase, IDamagable
         }
         else
         {
-            Destroy(model.gameObject);
+            Destroy(gameObject);
         }
     }
 }

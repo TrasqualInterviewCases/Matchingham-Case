@@ -12,13 +12,18 @@ public class ObstacleDetector : MonoBehaviour
         if (canDetect)
         {
             if (Physics.Raycast(transform.position, transform.forward, detectionDistance, detectableMask))
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
         else
+        {
             return false;
-
+        }
     }
 
     private void TurnOnDetection()
@@ -33,12 +38,12 @@ public class ObstacleDetector : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
     }
 
     private void OnDisable()
     {
-        
+
     }
 
     void OnDrawGizmosSelected()

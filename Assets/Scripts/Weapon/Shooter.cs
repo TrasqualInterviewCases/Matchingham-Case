@@ -4,10 +4,8 @@ public class Shooter : MonoBehaviour
 {
     //Add objectPooler
 
-    public void Shoot(Bullet prefab)
+    public void Shoot(PoolableObjectType type)
     {
-        //Refactor with pooler
-        var bullet = Instantiate(prefab, transform.position, transform.rotation);
-        bullet.SetPooler();
+        ObjectPooler.Instance.SpawnFromPool(type, transform.position, transform.rotation);
     }
 }

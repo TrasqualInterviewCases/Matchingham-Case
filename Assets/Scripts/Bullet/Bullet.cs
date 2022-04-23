@@ -1,20 +1,24 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IPoolable
 {
     [Header("Data")]
     [SerializeField] int damage = 1;
     [SerializeField] float bulletSpeed = 50f;
-    [SerializeField] float bulletRequeueTimer = 3f;
+    [SerializeField] float bulletRequeueTimer = 2f;
+    [SerializeField] PoolableObjectType type;
 
 
     [Header("Components")]
     [SerializeField] Rigidbody rb;
 
-    private void Start()
+    IEnumerator requeCo;
+
+    private void OnEnable()
     {
-        StartCoroutine(RequeueBullet());
+        requeCo = RequeueBullet(bulletRequeueTimer);
+        StartCoroutine(requeCo);
     }
 
     private void Update()
@@ -27,19 +31,28 @@ public class Bullet : MonoBehaviour
         if(other.TryGetComponent(out IDamagable damagable))
         {
             damagable.TakeDamage(damage);
-            //Refactor with pooler
-            Destroy(gameObject);
+
+            gameObject.SetActive(false);
         }
     }
 
-    IEnumerator RequeueBullet()
+    IEnumerator RequeueBullet(float timer)
     {
-        yield return new WaitForSeconds(bulletRequeueTimer);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(timer);
+        ObjectPooler.Instance.RequeuePiece(gameObject);
     }
 
-    public void SetPooler(/*objectpooler*/)
+    PoolableObjectType IPoolable.GetType()
     {
+        return type;
+    }
 
+    private void OnDisable()
+    {
+        if (requeCo != null)
+        {
+            StopCoroutine(requeCo);
+        }
+        requeCo = RequeueBullet(0f);
     }
 }
