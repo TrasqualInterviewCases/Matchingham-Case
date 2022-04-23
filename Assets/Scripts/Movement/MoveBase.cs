@@ -13,6 +13,7 @@ public abstract class MoveBase : MonoBehaviour
     [SerializeField] protected bool autoForward = true;
 
     public float Speed => data.forwardSpeed * multiplier;
+    public float HorizontaSpeed => data.horizontalSpeed;
     public float RotationSpeed => data.rotationSpeed;
 
 
@@ -21,6 +22,11 @@ public abstract class MoveBase : MonoBehaviour
 
     public bool isOn;
     bool isInputPressed;
+
+    public Vector2 GetDirection()
+    {
+        return direction;
+    }
 
     public void ToggleMovementOn()
     {
