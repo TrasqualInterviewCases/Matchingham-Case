@@ -78,6 +78,10 @@ public abstract class MoveBase : MonoBehaviour
         input.OnPressed += OnInputPressed;
         input.OnReleased += OnInputReleased;
         input.OnDrag += OnInputDrag;
+
+        GameManager.OnGameStarted += ToggleMovementOn;
+        GameManager.OnGameWon += ToggleMovementOff;
+        GameManager.OnGameFailed += ToggleMovementOff;
     }
 
     private void OnDisable()
@@ -85,5 +89,9 @@ public abstract class MoveBase : MonoBehaviour
         input.OnPressed -= OnInputPressed;
         input.OnReleased -= OnInputReleased;
         input.OnDrag -= OnInputDrag;
+
+        GameManager.OnGameStarted -= ToggleMovementOn;
+        GameManager.OnGameWon -= ToggleMovementOff;
+        GameManager.OnGameFailed -= ToggleMovementOff;
     }
 }

@@ -1,7 +1,6 @@
 using System;
-using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public static Action OnGameStarted;
     public static Action OnGameWon;
@@ -9,17 +8,16 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-
+        OnGameWon?.Invoke();
     }
 
     public void LoseGame()
     {
-
+        OnGameFailed?.Invoke();
     }
 
     public void StartGame()
     {
-
+        OnGameStarted?.Invoke();
     }
-
 }

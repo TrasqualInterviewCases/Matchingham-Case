@@ -1,21 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+public class ObjectPooler : Singleton<ObjectPooler>
 {
     [SerializeField] List<ObjectPool> pools = new List<ObjectPool>();
     Dictionary<PoolableObjectType, Queue<GameObject>> queueDictionary = new Dictionary<PoolableObjectType, Queue<GameObject>>();
     Dictionary<PoolableObjectType, ObjectPool> poolDictionary = new Dictionary<PoolableObjectType, ObjectPool>();
 
-    public static ObjectPooler Instance;
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(Instance.gameObject);
-        }
-        Instance = this;
-
         foreach (var pool in pools)
         {
             Queue<GameObject> piecePool = new Queue<GameObject>();

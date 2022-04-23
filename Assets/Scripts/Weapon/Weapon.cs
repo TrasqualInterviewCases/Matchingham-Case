@@ -17,27 +17,22 @@ public class Weapon : MonoBehaviour
     [SerializeField] Transform targetForRight;
     [SerializeField] Transform targetForLeft;
 
-    bool canDetect = true;
-
     private void Update()
     {
-        if (canDetect)
+        if (detector.DetectedTarget())
         {
-            if (detector.DetectedTarget())
-            {
-                ShootWeapon();
-            }
-            else
-            {
-                shootTimer = 0f;
-            }
+            ShootWeapon();
+        }
+        else
+        {
+            shootTimer = 0f;
         }
     }
 
     protected void ShootWeapon()
     {
         shootTimer += Time.deltaTime;
-        if(shootTimer >= shootCD)
+        if (shootTimer >= shootCD)
         {
             foreach (var shooter in shooters)
             {
