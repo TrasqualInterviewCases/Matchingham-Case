@@ -28,11 +28,14 @@ public class Bullet : MonoBehaviour, IPoolable
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out IDamagable damagable))
+        if(other.TryGetComponent(out ObstacleBase obstacle))
+        {
+            gameObject.SetActive(false);
+        }
+
+        if (other.TryGetComponent(out IDamagable damagable))
         {
             damagable.TakeDamage(damage);
-
-            gameObject.SetActive(false);
         }
     }
 

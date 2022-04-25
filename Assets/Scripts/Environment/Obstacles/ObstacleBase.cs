@@ -33,9 +33,14 @@ public class ObstacleBase : MonoBehaviour
         obstacleMoveTween = transform.DOMove(localEndPos, moveDuration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
     }
 
+    protected void StopMovement()
+    {
+        if (obstacleMoveTween != null)
+            obstacleMoveTween.Kill();
+    }
+
     private void OnDisable()
     {
-        if(obstacleMoveTween != null)
-        obstacleMoveTween.Kill();
+        StopMovement();
     }
 }

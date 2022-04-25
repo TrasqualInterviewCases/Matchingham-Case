@@ -54,15 +54,15 @@ public class BreakableObstacle : ObstacleBase, IDamagable
     {
         col.enabled = false;
         healthText.gameObject.SetActive(false);
+        StopMovement();
         if (fracturedModel.childCount > 0)
         {
             foreach (Transform child in fracturedModel)
             {
                 var childRB = child.gameObject.AddComponent<Rigidbody>();
                 child.gameObject.AddComponent<BoxCollider>();
-                childRB.AddExplosionForce(2000f, fracturedModel.position, 10f, 1f);
-                child.SetParent(null);
-                Destroy(child.gameObject, 5f);
+                childRB.AddExplosionForce(20f, fracturedModel.position, 10f, 1f);
+                Destroy(child.gameObject, 1.5f);
             }
         }
         else

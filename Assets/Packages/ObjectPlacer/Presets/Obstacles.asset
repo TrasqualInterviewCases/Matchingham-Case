@@ -13,7 +13,19 @@ MonoBehaviour:
   m_Name: Obstacles
   m_EditorClassIdentifier: 
   groupName: Obstacles
-  objectList: []
+  objectList:
+  - {fileID: 3412108263747292775, guid: d69f2be223953fb4dae972d345ef5f5b, type: 3}
+  - {fileID: 8503523630931718526, guid: 635581496029d3e4796b53d6a51557b2, type: 3}
+  - {fileID: 3614998349710335845, guid: 291b02a6badc2204ca991c44c3a3917b, type: 3}
+  - {fileID: 6112076869859759177, guid: 4e8631754ffb67542b2d158cb0a9726b, type: 3}
+  - {fileID: 2888429927302797026, guid: db88d6e4c50ca724d9f012c52297f313, type: 3}
+  - {fileID: 1002382072687078538, guid: 087c006fdfa71ea46ba59441b1cd82ed, type: 3}
+  - {fileID: 7723784748716456096, guid: 7f5ec6a1cbd18384ba15207d06845ec6, type: 3}
+  - {fileID: 5261638294471875956, guid: f1de50e1cebf52f42991192cd38c5589, type: 3}
+  - {fileID: 5227033680688051610, guid: 092df6e9834666341b4db6c40477b56c, type: 3}
+  - {fileID: 1611559082978523226, guid: a10a40588413c59449d6790a5213555f, type: 3}
+  - {fileID: 8584590387587272284, guid: c5fdbe5bf03b3d14bb4fdd232f3ea477, type: 3}
+  - {fileID: 7640315919349184648, guid: 6531f3eb1b6e70049804c8c890922bc7, type: 3}
   initialOffset: 10
   placementInterval: 40
   elementPlacementInterval: 2
