@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5227033680688051611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MovingBLeftObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,9 +38,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5227033680688051611}
     m_Modifications:
+    - target: {fileID: 175926879598648666, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 663746571108609923, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1439947940572437704, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670971782576124517, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389935175182710421, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3216228600594547268, guid: b5908ff76036eb044a969301c90a47de, type: 3}
       propertyPath: m_Name
       value: MovingBreakableObstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216228600594547268, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3216228600594547320, guid: b5908ff76036eb044a969301c90a47de, type: 3}
       propertyPath: m_RootOrder
@@ -85,6 +109,34 @@ PrefabInstance:
     - target: {fileID: 3216228600594547320, guid: b5908ff76036eb044a969301c90a47de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3216228600778344069, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3217067053023273214, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288871998961492329, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4026085630910830997, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408301771183570362, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733184016110827091, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6809126032822551815, guid: b5908ff76036eb044a969301c90a47de, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5908ff76036eb044a969301c90a47de, type: 3}

@@ -6,6 +6,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
     [SerializeField] List<ObjectPool> pools = new List<ObjectPool>();
     Dictionary<PoolableObjectType, Queue<GameObject>> queueDictionary = new Dictionary<PoolableObjectType, Queue<GameObject>>();
     Dictionary<PoolableObjectType, ObjectPool> poolDictionary = new Dictionary<PoolableObjectType, ObjectPool>();
+    Dictionary<PoolableObjectType, Transform> poolParents = new Dictionary<PoolableObjectType, Transform>();
 
     private void Awake()
     {
@@ -14,6 +15,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
             Queue<GameObject> piecePool = new Queue<GameObject>();
             var poolParent = new GameObject(pool.type.ToString() + " pool");
             poolParent.transform.SetParent(transform);
+            poolParents[pool.type] = poolParent.transform;
             for (int i = 0; i < pool.poolSize; i++)
             {
                 var spawnedPiece = Instantiate(pool.prefab, poolParent.transform);
@@ -32,6 +34,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
         if (queueDictionary[type].Count <= 0)
         {
             piece = Instantiate(poolDictionary[type].prefab);
+            piece.transform.SetParent(poolParents[type].transform);
             piece.SetActive(false);
             queueDictionary[type].Enqueue(piece);
         }
@@ -57,8 +60,10 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
     public void RequeuePiece(GameObject piece)
     {
+        var pieceType = piece.GetComponent<IPoolable>().GetType();
         piece.transform.position = transform.position;
+        piece.transform.SetParent(poolParents[pieceType].transform);
+        queueDictionary[pieceType].Enqueue(piece);
         piece.SetActive(false);
-        queueDictionary[piece.GetComponent<IPoolable>().GetType()].Enqueue(piece);
     }
 }

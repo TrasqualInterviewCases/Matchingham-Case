@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  bulletSpeed: 50
+  bulletSpeed: 75
   bulletRequeueTimer: 2
   type: 0
   rb: {fileID: -8877722226655124316}

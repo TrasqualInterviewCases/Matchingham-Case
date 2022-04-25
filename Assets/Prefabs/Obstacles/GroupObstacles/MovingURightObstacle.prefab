@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7640315919349184649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MovingURightObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,9 +38,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7640315919349184649}
     m_Modifications:
+    - target: {fileID: 315952942169291232, guid: e641fbebd8e71aa40af8df0844840a11, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 316793667313343322, guid: e641fbebd8e71aa40af8df0844840a11, type: 3}
       propertyPath: m_Name
       value: MovingUnBreakableObstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 316793667313343322, guid: e641fbebd8e71aa40af8df0844840a11, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 316793667313343334, guid: e641fbebd8e71aa40af8df0844840a11, type: 3}
       propertyPath: m_RootOrder

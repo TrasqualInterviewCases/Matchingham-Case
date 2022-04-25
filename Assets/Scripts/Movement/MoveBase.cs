@@ -94,6 +94,7 @@ public abstract class MoveBase : MonoBehaviour
         GameManager.OnGameFailed += ToggleMovementOff;
 
         PlayerController.OnPlayerFailed += ToggleMovementOff;
+        PlayerController.OnPlayerFinished += ToggleMovementOff;
     }
 
     private void OnDisable()
@@ -107,5 +108,6 @@ public abstract class MoveBase : MonoBehaviour
         GameManager.OnGameFailed -= ToggleMovementOff;
 
         PlayerController.OnPlayerFailed -= ToggleMovementOff;
+        PlayerController.OnPlayerFinished -= ToggleMovementOff;
     }
 }

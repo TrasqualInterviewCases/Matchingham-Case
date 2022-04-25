@@ -102,10 +102,12 @@ public class WeaponHandler : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.OnPlayerFailed += CloseIK;
+        PlayerController.OnPlayerFinished += CloseIK;
     }
 
     private void OnDisable()
     {
         PlayerController.OnPlayerFailed -= CloseIK;
+        PlayerController.OnPlayerFinished -= CloseIK;
     }
 }

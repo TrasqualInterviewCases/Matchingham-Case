@@ -43,6 +43,7 @@ public class ObstacleDetector : MonoBehaviour
         GameManager.OnGameFailed += TurnOffDetection;
 
         PlayerController.OnPlayerFailed += TurnOffDetection;
+        PlayerController.OnPlayerFinished += TurnOffDetection;
     }
 
     private void OnDisable()
@@ -52,6 +53,7 @@ public class ObstacleDetector : MonoBehaviour
         GameManager.OnGameFailed -= TurnOffDetection;
 
         PlayerController.OnPlayerFailed -= TurnOffDetection;
+        PlayerController.OnPlayerFinished -= TurnOffDetection;
     }
 
     void OnDrawGizmosSelected()

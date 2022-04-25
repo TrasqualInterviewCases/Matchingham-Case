@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class ObstacleBase : MonoBehaviour
@@ -14,7 +15,7 @@ public class ObstacleBase : MonoBehaviour
     {
         if (isMoving)
         {
-            Move();
+            StartCoroutine(Move());
         }
     }
 
@@ -27,8 +28,9 @@ public class ObstacleBase : MonoBehaviour
     }
 
 
-    protected virtual void Move() 
+    protected virtual IEnumerator Move() 
     {
+        yield return new WaitForSeconds(0.2f);
         var localEndPos = transform.TransformPoint(moveEndPos);
         obstacleMoveTween = transform.DOMove(localEndPos, moveDuration).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
     }

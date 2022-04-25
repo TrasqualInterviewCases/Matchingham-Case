@@ -17,8 +17,8 @@ MonoBehaviour:
   - {fileID: 3960379503158224891, guid: 2ea64f163961f4a4db3d9923b5c68eff, type: 3}
   - {fileID: 3942541682920896543, guid: cb7373edacd376746864706f86760e90, type: 3}
   - {fileID: 808288580916417502, guid: 489798f12ec98d64a9dc0545573c8901, type: 3}
-  initialOffset: 10
-  placementInterval: 40
+  initialOffset: 60
+  placementInterval: 100
   elementPlacementInterval: 2
-  subGroupCountMinMax: {x: 1, y: 5}
-  useRandomX: 0
+  subGroupCountMinMax: {x: 1, y: 1}
+  useRandomX: 1
