@@ -8,10 +8,13 @@ public class BreakableObstacle : ObstacleBase, IDamagable
     [SerializeField] Transform fracturedModel;
     [SerializeField] Collider col;
 
-    [Header("HealthRelated")]
+    [Header("Health Related Params")]
     [SerializeField] TMP_Text healthText;
     [SerializeField] int maxHealth = 10;
     int currentHealth;
+
+    [Header("Point Params")]
+    [SerializeField] int rewardedPoints = 1;
 
     [SerializeField] int rocketDropChance = 25;
 
@@ -60,7 +63,7 @@ public class BreakableObstacle : ObstacleBase, IDamagable
         healthText.gameObject.SetActive(false);
         StopMovement();
         DropRocket();
-        
+        PointCollector.Instance.CollectPoints(rewardedPoints);
         if (fracturedModel.childCount > 0)
         {
             foreach (Transform child in fracturedModel)
@@ -68,7 +71,7 @@ public class BreakableObstacle : ObstacleBase, IDamagable
                 var childRB = child.gameObject.AddComponent<Rigidbody>();
                 child.gameObject.AddComponent<BoxCollider>();
                 childRB.AddExplosionForce(20f, fracturedModel.position, 10f, 1f);
-                Destroy(child.gameObject, 1.5f);
+                Destroy(child.gameObject, .5f);
             }
         }
         else
@@ -81,9 +84,9 @@ public class BreakableObstacle : ObstacleBase, IDamagable
     {
         var roll = Random.Range(0, 101);
 
-        if (roll > rocketDropChance)
+        if (roll > (100 - rocketDropChance))
         {
-            ObjectPooler.Instance.SpawnFromPool(PoolableObjectType.Rocket, transform.position + transform.up, transform.rotation);
+            ObjectPooler.Instance.SpawnFromPool(PoolableObjectType.Rocket, transform.position + transform.up, transform.rotation * Quaternion.AngleAxis(90, transform.right));
         }
     }
 }

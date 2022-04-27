@@ -18,7 +18,6 @@ public class LevelManager : Singleton<LevelManager>
         {
             PlayerPrefs.SetInt("Level", 0);
         }
-        currentLevel = 2;
         LoadLevelAtIndex(currentLevel);
         if (currentLevel > 1)
         {

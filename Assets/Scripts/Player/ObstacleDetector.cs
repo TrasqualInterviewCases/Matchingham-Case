@@ -5,7 +5,7 @@ public class ObstacleDetector : MonoBehaviour
     [SerializeField] LayerMask detectableMask;
     [SerializeField] float detectionDistance = 10f;
 
-    bool canDetect = true;
+    bool canDetect;
 
     public bool DetectedTarget(out Transform target)
     {
@@ -46,7 +46,6 @@ public class ObstacleDetector : MonoBehaviour
         GameManager.OnGameFailed += TurnOffDetection;
 
         PlayerController.OnPlayerFailed += TurnOffDetection;
-        PlayerController.OnPlayerFinished += TurnOffDetection;
     }
 
     private void OnDisable()
@@ -56,7 +55,6 @@ public class ObstacleDetector : MonoBehaviour
         GameManager.OnGameFailed -= TurnOffDetection;
 
         PlayerController.OnPlayerFailed -= TurnOffDetection;
-        PlayerController.OnPlayerFinished -= TurnOffDetection;
     }
 
     void OnDrawGizmosSelected()

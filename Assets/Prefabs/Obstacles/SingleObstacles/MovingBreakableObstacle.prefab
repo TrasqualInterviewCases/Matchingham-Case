@@ -85,7 +85,8 @@ MonoBehaviour:
   col: {fileID: 3216228600594547322}
   healthText: {fileID: 3216228600778344123}
   maxHealth: 10
-  rocketDropChance: 25
+  rewardedPoints: 1
+  rocketDropChance: 50
 --- !u!1 &3216228600778344069
 GameObject:
   m_ObjectHideFlags: 0

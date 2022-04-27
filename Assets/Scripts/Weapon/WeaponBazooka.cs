@@ -1,50 +1,52 @@
+using System;
 using UnityEngine;
 
 public class WeaponBazooka : Weapon
 {
-    Transform prevTarget;
+    public Action OnOutOfAmmo;
+
     [SerializeField] int ammoCount;
 
     protected override void Update()
     {
         if (detector.DetectedTarget(out Transform target))
         {
-            if (prevTarget != target)
+            shootTimer += Time.deltaTime;
+            if (shootTimer >= shootCD)
             {
-                ShootWeapon();
-                prevTarget = target;
+                if (target.TryGetComponent(out FinishWall finishWall))
+                {
+                    if (!finishWall.IsShotAt)
+                    {
+                        ShootWeapon();
+                        shootTimer = 0f;
+                        finishWall.IsShotAt = true;
+                    }
+                }
             }
-        }
-        else
-        {
-            shootTimer = 0f;
         }
     }
 
     protected override void ShootWeapon()
     {
-        if(ammoCount > 0)
+        if (ammoCount > 0)
         {
-            shootTimer += Time.deltaTime;
-            if (shootTimer >= shootCD)
+            foreach (var shooter in shooters)
             {
-                foreach (var shooter in shooters)
-                {
-                    shooter.Shoot(bulletType);
-                    ammoCount--;
-                }
-                PlayRecoilAnim();
-                shootTimer = 0f;
+                shooter.Shoot(bulletType);
+                ammoCount--;
             }
+            PlayRecoilAnim();
         }
         else
         {
-            //stop finish sequence
+            OnOutOfAmmo?.Invoke();
         }
     }
 
     public void AddAmmo(int amount)
     {
         ammoCount += amount;
+        ammoCount = Mathf.Clamp(ammoCount, 0, 20);
     }
 }

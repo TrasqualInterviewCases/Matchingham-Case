@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour, IPoolable
 
     [Header("Components")]
     [SerializeField] Rigidbody rb;
+    [SerializeField] TrailRenderer tr;
 
     IEnumerator requeCo;
 
@@ -49,12 +50,14 @@ public class Projectile : MonoBehaviour, IPoolable
     {
         yield return new WaitForSeconds(timer);
         isShot = false;
+        tr.enabled = false;
         ObjectPooler.Instance.RequeuePiece(gameObject);
     }
 
     public void Shoot()
     {
         isShot = true;
+        tr.enabled = true;
         requeCo = RequeueBullet(bulletRequeueTimer);
         StartCoroutine(requeCo);
     }

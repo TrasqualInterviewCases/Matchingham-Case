@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -61,10 +62,13 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
     public void RequeuePiece(GameObject piece)
     {
-        var pieceType = piece.GetComponent<IPoolable>().GetType();
-        piece.transform.position = transform.position;
-        piece.transform.SetParent(poolParents[pieceType].transform);
-        queueDictionary[pieceType].Enqueue(piece);
-        piece.SetActive(false);
+        DOTween.Sequence().SetDelay(0.05f).OnComplete(() =>
+        {
+            piece.SetActive(false);
+            var pieceType = piece.GetComponent<IPoolable>().GetType();
+            piece.transform.position = transform.position;
+            piece.transform.SetParent(poolParents[pieceType].transform);
+            queueDictionary[pieceType].Enqueue(piece);
+        });
     }
 }

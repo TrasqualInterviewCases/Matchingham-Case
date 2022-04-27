@@ -4,7 +4,7 @@ using UnityEngine.Animations.Rigging;
 public class WeaponHandler : MonoBehaviour
 {
     [Header("Weapons")]
-    [SerializeField] Weapon[] weapons;
+    [SerializeField] public Weapon[] weapons;
     [SerializeField] Weapon activeWeapon;
 
     [Header("WeaponPositioning")]
@@ -102,12 +102,12 @@ public class WeaponHandler : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.OnPlayerFailed += CloseIK;
-        PlayerController.OnPlayerFinished += CloseIK;
+        GameManager.OnGameWon += CloseIK;
     }
 
     private void OnDisable()
     {
         PlayerController.OnPlayerFailed -= CloseIK;
-        PlayerController.OnPlayerFinished -= CloseIK;
+        GameManager.OnGameWon -= CloseIK;
     }
 }

@@ -35,13 +35,23 @@ public class PlayerAnimationManager : MonoBehaviour
         anim.SetBool("fail", true);
     }
 
+    private void StopAnimations()
+    {
+        anim.SetFloat("moveHorizontal", 0f);
+        anim.SetFloat("moveForward", 0f);
+    }
+
     private void OnEnable()
     {
         PlayerController.OnPlayerFailed += PlayFallbackAnim;
+        GameManager.OnGameWon += StopAnimations;
+        GameManager.OnGameFailed += StopAnimations;
     }
 
     private void OnDisable()
     {
         PlayerController.OnPlayerFailed -= PlayFallbackAnim;
+        GameManager.OnGameWon -= StopAnimations;
+        GameManager.OnGameFailed -= StopAnimations;
     }
 }

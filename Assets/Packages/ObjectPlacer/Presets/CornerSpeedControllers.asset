@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c6b0419356bd67469e4a62273fc434f, type: 3}
+  m_Name: CornerSpeedControllers
+  m_EditorClassIdentifier: 
+  groupName: CornerSpeedControllers
+  objectList:
+  - {fileID: 851184270605744808, guid: bca4f1096642b7543bb20e194096fceb, type: 3}
+  - {fileID: 3393118873909835848, guid: 6e12bc7b108df4f4e9ecaf37d4dbcfa7, type: 3}
+  initialOffset: 10
+  placementInterval: 40
+  elementPlacementInterval: 2
+  subGroupCountMinMax: {x: 1, y: 5}
+  useRandomX: 0
