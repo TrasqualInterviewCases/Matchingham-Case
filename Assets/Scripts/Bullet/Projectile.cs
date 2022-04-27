@@ -1,28 +1,23 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, IPoolable
+public class Projectile : MonoBehaviour, IPoolable
 {
     [Header("Data")]
     [SerializeField] int damage = 1;
     [SerializeField] float bulletSpeed = 50f;
     [SerializeField] float bulletRequeueTimer = 2f;
     [SerializeField] PoolableObjectType type;
-
+    private bool isShot;
 
     [Header("Components")]
     [SerializeField] Rigidbody rb;
 
     IEnumerator requeCo;
 
-    private void OnEnable()
-    {
-        requeCo = RequeueBullet(bulletRequeueTimer);
-        StartCoroutine(requeCo);
-    }
-
     private void Update()
     {
+        if(isShot)
         rb.MovePosition(transform.position + transform.forward * Time.deltaTime * bulletSpeed);
     }
 
@@ -30,7 +25,6 @@ public class Bullet : MonoBehaviour, IPoolable
     {
         if(other.TryGetComponent(out ObstacleBase obstacle))
         {
-            Debug.Log("hit obstacle");
             if (requeCo != null)
             {
                 StopCoroutine(requeCo);
@@ -54,7 +48,15 @@ public class Bullet : MonoBehaviour, IPoolable
     IEnumerator RequeueBullet(float timer)
     {
         yield return new WaitForSeconds(timer);
+        isShot = false;
         ObjectPooler.Instance.RequeuePiece(gameObject);
+    }
+
+    public void Shoot()
+    {
+        isShot = true;
+        requeCo = RequeueBullet(bulletRequeueTimer);
+        StartCoroutine(requeCo);
     }
 
     PoolableObjectType IPoolable.GetType()

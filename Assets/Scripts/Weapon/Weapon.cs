@@ -4,25 +4,25 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Header("Data")]
-    [SerializeField] float shootCD = 0.5f;
-    float shootTimer = 0f;
+    [SerializeField] protected float shootCD = 0.5f;
+    protected float shootTimer = 0f;
 
     [Header("Visuals")]
-    [SerializeField] PoolableObjectType bulletType;
+    [SerializeField] protected PoolableObjectType bulletType;
     [SerializeField] Vector3 gunRecoilPos;
     [SerializeField] Vector3 gunRecoilRot;
 
     [Header("Components")]
-    [SerializeField] ObstacleDetector detector;
-    [SerializeField] Shooter[] shooters;
+    [SerializeField] protected ObstacleDetector detector;
+    [SerializeField] protected Shooter[] shooters;
 
     [Header("IKTargets")]
     [SerializeField] Transform targetForRight;
     [SerializeField] Transform targetForLeft;
 
-    private void Update()
+    protected virtual void Update()
     {
-        if (detector.DetectedTarget())
+        if (detector.DetectedTarget(out Transform target))
         {
             ShootWeapon();
         }
@@ -32,7 +32,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void ShootWeapon()
+    protected virtual void ShootWeapon()
     {
         shootTimer += Time.deltaTime;
         if (shootTimer >= shootCD)
@@ -46,7 +46,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void PlayRecoilAnim()
+    protected void PlayRecoilAnim()
     {
         Sequence s = DOTween.Sequence();
         s.Append(transform.DOLocalMove(gunRecoilPos, shootCD / 3f).SetEase(Ease.Linear));

@@ -37,7 +37,7 @@ public class PathMove : MoveBase
     {
         if (CanMove())
         {
-            if (detector.DetectedTarget())
+            if (detector.DetectedTarget(out Transform target))
             {
                 ToggleRotationOff();
             }

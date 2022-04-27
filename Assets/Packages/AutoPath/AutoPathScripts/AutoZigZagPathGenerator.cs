@@ -36,7 +36,6 @@ public class AutoZigZagPathGenerator : MonoBehaviour
         var roadMeshCreator = GetComponent<RoadMeshCreator>();
 
         InitializePath();
-        roadMeshCreator.textureTiling = pathLenght;
         roadMeshCreator.flattenSurface = true;
         roadMeshCreator.roadWidth = roadWidth;
     }

@@ -56,7 +56,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
             }
         }
 
-        return piece.GetComponent<GameObject>();
+        return piece;
     }
 
     public void RequeuePiece(GameObject piece)

@@ -7,21 +7,24 @@ public class ObstacleDetector : MonoBehaviour
 
     bool canDetect = true;
 
-    public bool DetectedTarget()
+    public bool DetectedTarget(out Transform target)
     {
         if (canDetect)
         {
-            if (Physics.Raycast(transform.position, transform.forward, detectionDistance, detectableMask))
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, detectionDistance, detectableMask))
             {
+                target = hit.transform;
                 return true;
             }
             else
             {
+                target = null;
                 return false;
             }
         }
         else
         {
+            target = null;
             return false;
         }
     }

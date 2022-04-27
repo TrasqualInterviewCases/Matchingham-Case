@@ -11,7 +11,7 @@ public class PlayerAnimationManager : MonoBehaviour
         if(moveBase.CanMove())
         PlayMoveAnim();
 
-        if (detector.DetectedTarget())
+        if (detector.DetectedTarget(out Transform target))
             ToggleShooting(true);
         else
             ToggleShooting(false);

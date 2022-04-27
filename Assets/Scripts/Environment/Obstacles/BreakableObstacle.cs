@@ -3,13 +3,17 @@ using UnityEngine;
 
 public class BreakableObstacle : ObstacleBase, IDamagable
 {
+    [Header("Models")] 
     [SerializeField] Transform model;
     [SerializeField] Transform fracturedModel;
     [SerializeField] Collider col;
 
+    [Header("HealthRelated")]
     [SerializeField] TMP_Text healthText;
     [SerializeField] int maxHealth = 10;
     int currentHealth;
+
+    [SerializeField] int rocketDropChance = 25;
 
     private void Start()
     {
@@ -55,6 +59,8 @@ public class BreakableObstacle : ObstacleBase, IDamagable
         col.enabled = false;
         healthText.gameObject.SetActive(false);
         StopMovement();
+        DropRocket();
+        
         if (fracturedModel.childCount > 0)
         {
             foreach (Transform child in fracturedModel)
@@ -68,6 +74,16 @@ public class BreakableObstacle : ObstacleBase, IDamagable
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void DropRocket()
+    {
+        var roll = Random.Range(0, 101);
+
+        if (roll > rocketDropChance)
+        {
+            ObjectPooler.Instance.SpawnFromPool(PoolableObjectType.Rocket, transform.position + transform.up, transform.rotation);
         }
     }
 }

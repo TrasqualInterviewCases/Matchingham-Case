@@ -33,7 +33,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
-        if (obstacleDetector.DetectedTarget())
+        if (obstacleDetector.DetectedTarget(out Transform target))
         {
             SetShootingPosition();
         }

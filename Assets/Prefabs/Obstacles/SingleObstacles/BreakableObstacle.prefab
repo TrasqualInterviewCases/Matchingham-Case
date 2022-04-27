@@ -255,6 +255,7 @@ MonoBehaviour:
   col: {fileID: 2240259639541330094}
   healthText: {fileID: 2240259638756570223}
   maxHealth: 10
+  rocketDropChance: 10
 --- !u!1001 &2240259639997679440
 PrefabInstance:
   m_ObjectHideFlags: 0
