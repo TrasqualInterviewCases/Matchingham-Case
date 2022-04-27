@@ -30,12 +30,24 @@ public class Bullet : MonoBehaviour, IPoolable
     {
         if(other.TryGetComponent(out ObstacleBase obstacle))
         {
-            gameObject.SetActive(false);
+            Debug.Log("hit obstacle");
+            if (requeCo != null)
+            {
+                StopCoroutine(requeCo);
+            }
+            requeCo = RequeueBullet(0f);
+            StartCoroutine(requeCo);
         }
 
         if (other.TryGetComponent(out IDamagable damagable))
         {
             damagable.TakeDamage(damage);
+            if (requeCo != null)
+            {
+                StopCoroutine(requeCo);
+            }
+            requeCo = RequeueBullet(0f);
+            StartCoroutine(requeCo);
         }
     }
 
@@ -48,14 +60,5 @@ public class Bullet : MonoBehaviour, IPoolable
     PoolableObjectType IPoolable.GetType()
     {
         return type;
-    }
-
-    private void OnDisable()
-    {
-        if (requeCo != null)
-        {
-            StopCoroutine(requeCo);
-        }
-        requeCo = RequeueBullet(0f);
     }
 }

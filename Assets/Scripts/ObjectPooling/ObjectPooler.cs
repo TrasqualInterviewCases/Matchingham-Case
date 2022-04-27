@@ -44,6 +44,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
         piece.transform.position = pos;
         piece.transform.rotation = rot;
+        piece.transform.SetParent(null);
         piece.SetActive(true);
 
         if (queueDictionary[type].Count > poolDictionary[type].poolSize)
