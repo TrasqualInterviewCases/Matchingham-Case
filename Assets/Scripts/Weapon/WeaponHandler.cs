@@ -51,7 +51,7 @@ public class WeaponHandler : MonoBehaviour
             RightHandIK.weight = 1;
             weaponParent.SetParent(model);
         }
-        if (Vector3.Distance(weaponParent.transform.localPosition, riggedPos) >= 0.01f)
+        if (Vector3.Distance(weaponParent.transform.localPosition, riggedPos) >= 0.005f)
         {
             weaponParent.transform.localRotation = Quaternion.Lerp(weaponParent.transform.localRotation, Quaternion.identity, Time.deltaTime * weaponPositioningSpeed);
             weaponParent.transform.localPosition = Vector3.Lerp(weaponParent.transform.localPosition, riggedPos, Time.deltaTime * weaponPositioningSpeed);
@@ -65,7 +65,7 @@ public class WeaponHandler : MonoBehaviour
             RightHandIK.weight = 0;
             weaponParent.SetParent(rightHand);
         }
-        if (Vector3.Distance(weaponParent.transform.localPosition, animatedPos) >= 0.01f)
+        if (Vector3.Distance(weaponParent.transform.localPosition, animatedPos) >= 0.005f)
         {
             weaponParent.transform.localRotation = Quaternion.Lerp(weaponParent.transform.localRotation, animatedRot, Time.deltaTime * weaponPositioningSpeed);
             weaponParent.transform.localPosition = Vector3.Lerp(weaponParent.transform.localPosition, animatedPos, Time.deltaTime * weaponPositioningSpeed);

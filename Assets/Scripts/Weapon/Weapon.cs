@@ -40,8 +40,8 @@ public class Weapon : MonoBehaviour
             foreach (var shooter in shooters)
             {
                 shooter.Shoot(bulletType);
-                PlayRecoilAnim();
             }
+            PlayRecoilAnim();
             shootTimer = 0f;
         }
     }
@@ -49,8 +49,8 @@ public class Weapon : MonoBehaviour
     private void PlayRecoilAnim()
     {
         Sequence s = DOTween.Sequence();
-        s.Append(transform.DOLocalMove(gunRecoilPos, shootCD / 2f).SetEase(Ease.OutBack));
-        s.Join(transform.DOLocalRotate(gunRecoilRot, shootCD / 2f).SetEase(Ease.OutBack));
+        s.Append(transform.DOLocalMove(gunRecoilPos, shootCD / 3f).SetEase(Ease.Linear));
+        s.Join(transform.DOLocalRotate(gunRecoilRot, shootCD / 3f).SetEase(Ease.Linear));
         s.OnComplete(() => s.Rewind());
     }
 
